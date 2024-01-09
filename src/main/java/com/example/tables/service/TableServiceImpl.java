@@ -34,8 +34,8 @@ public class TableServiceImpl implements TableService {
                     now,
                     limit
             );
-            log.info("Удалили {} записей из таблицы {}", deleted, tableName);
             totalDeleted += deleted;
+            log.info("Удалили {} записей из таблицы {}", totalDeleted, tableName);
         } while (deleted != 0);
         log.info("Удаление заверщено. Всего из таблицы {} удалено: {}", tableName, totalDeleted);
     }
