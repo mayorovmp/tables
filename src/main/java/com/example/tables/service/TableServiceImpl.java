@@ -19,6 +19,11 @@ public class TableServiceImpl implements TableService {
 
     private final JdbcTemplate jdbcTemplate;
 
+    /**
+     * Цикличное удаление записей порциями, пока итерация возвращает не нулевое кол-во строк.
+     * @param tableName название таблицы.
+     * @param limit размер порции удаления.
+     */
     public void delete(String tableName, int limit) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         var deleted = 0;
@@ -35,6 +40,11 @@ public class TableServiceImpl implements TableService {
         log.info("Удаление заверщено. Всего из таблицы {} удалено: {}", tableName, totalDeleted);
     }
 
+    /**
+     * Пакетная генерация данных, размер пакета зафиксирован в константу.
+     * @param tableName название таблицы.
+     * @param limit кол-во сгенерированных данных.
+     */
     public void generate(String tableName, int limit) {
         var rowA = new ArrayList<TableA>();
         for (var i = 0; i < limit; i++) {
