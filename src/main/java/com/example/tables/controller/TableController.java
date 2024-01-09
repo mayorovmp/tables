@@ -16,18 +16,18 @@ public class TableController {
 
     private final TableService tableService;
 
-    @PostMapping("/table")
-    public void generateTable(@RequestBody Request request) {
-        log.info("Начало генерации данных в таблицу {}", request.getTableName());
-        tableService.generate(request.getTableName(), request.getLimit());
-        log.info("Конец генерации данных в таблицу {}", request.getTableName());
-    }
-
     @DeleteMapping("/table")
     public void deleteTableB(@RequestBody Request request) {
         log.info("Начало удаление данных из таблицы {}", request.getTableName());
         tableService.delete(request.getTableName(), request.getLimit());
         log.info("Конец удаления данных из таблицы {}", request.getTableName());
+    }
+
+    @PostMapping("/table")
+    public void generateTable(@RequestBody Request request) {
+        log.info("Начало генерации данных в таблицу {}", request.getTableName());
+        tableService.generate(request.getTableName(), request.getLimit());
+        log.info("Конец генерации данных в таблицу {}", request.getTableName());
     }
 
 }
