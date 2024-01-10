@@ -20,6 +20,7 @@ Content-Type: application/json
 
 {
   "tableName": "tableB",
+  "timestamp": "2015-07-05T22:16:18+05",
   "limit": 10
 }
 ```

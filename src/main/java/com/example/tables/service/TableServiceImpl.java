@@ -23,11 +23,11 @@ public class TableServiceImpl implements TableService {
      * Цикличное удаление записей порциями, пока итерация возвращает не нулевое кол-во строк.
      *
      * @param tableName название таблицы.
+     * @param timestamp граница времени.
      * @param limit     размер порции удаления.
      */
-    public void delete(String tableName, int limit) {
+    public void delete(String tableName, Timestamp timestamp, int limit) {
         validateTableName(tableName);
-        Timestamp now = new Timestamp(System.currentTimeMillis());
         var deleted = 0;
         var totalDeleted = 0;
         do {
@@ -35,7 +35,7 @@ public class TableServiceImpl implements TableService {
             // Для работы с Postgres, Oracle и др. могут потребоваться правки.
             deleted = jdbcTemplate.update(
                     "delete from " + tableName + " where created_at < ? limit ?",
-                    now,
+                    timestamp,
                     limit
             );
             totalDeleted += deleted;

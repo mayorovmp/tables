@@ -19,7 +19,7 @@ public class TableController {
     @DeleteMapping("/table")
     public void deleteTableB(@RequestBody Request request) {
         log.info("Начало удаление данных из таблицы {}", request.getTableName());
-        tableService.delete(request.getTableName(), request.getLimit());
+        tableService.delete(request.getTableName(), request.getTimestamp(), request.getLimit());
         log.info("Конец удаления данных из таблицы {}", request.getTableName());
     }
 

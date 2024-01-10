@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,6 +14,9 @@ import lombok.Setter;
 public class Request {
 
     String tableName;
+
     int limit;
+
+    Timestamp timestamp;
 
 }
