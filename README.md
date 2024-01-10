@@ -17,6 +17,7 @@ Content-Type: application/json
 
 ## Удаление: 
 `tableName` - название таблицы(`tableA` или `tableB`).\
+`timestamp` - граница времени, более раннии записи удаляем.\
 `limit` - размер пакета для удаления в рамках одного запроса.
 ```
 DELETE http://localhost:8080/table
