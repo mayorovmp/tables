@@ -29,6 +29,8 @@ public class TableServiceImpl implements TableService {
         var deleted = 0;
         var totalDeleted = 0;
         do {
+            // sql-код совместим с H2.
+            // Для работы с Postgres, Oracle и др. могут потребоваться правки.
             deleted = jdbcTemplate.update(
                     "delete from " + tableName + " where created_at < ? limit ?",
                     now,
