@@ -21,10 +21,12 @@ public class TableServiceImpl implements TableService {
 
     /**
      * Цикличное удаление записей порциями, пока итерация возвращает не нулевое кол-во строк.
+     *
      * @param tableName название таблицы.
-     * @param limit размер порции удаления.
+     * @param limit     размер порции удаления.
      */
     public void delete(String tableName, int limit) {
+        validateTableName(tableName);
         Timestamp now = new Timestamp(System.currentTimeMillis());
         var deleted = 0;
         var totalDeleted = 0;
@@ -44,10 +46,12 @@ public class TableServiceImpl implements TableService {
 
     /**
      * Пакетная генерация данных, размер пакета зафиксирован в константу.
+     *
      * @param tableName название таблицы.
-     * @param limit кол-во сгенерированных данных.
+     * @param limit     кол-во сгенерированных данных.
      */
     public void generate(String tableName, int limit) {
+        validateTableName(tableName);
         var rowA = new ArrayList<TableA>();
         for (var i = 0; i < limit; i++) {
             rowA.add(new TableA(UUID.randomUUID(), new Timestamp(System.currentTimeMillis())));
@@ -58,5 +62,11 @@ public class TableServiceImpl implements TableService {
                     ps.setString(1, row.getId().toString());
                     ps.setTimestamp(2, row.getCreatedAt());
                 });
+    }
+
+    private void validateTableName(String tableName) {
+        if (!tableName.matches("^[a-zA-Z0-9_]+$")) {
+            throw new RuntimeException("Недопустимое имя таблицы");
+        }
     }
 }
